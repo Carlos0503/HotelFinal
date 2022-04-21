@@ -28,6 +28,7 @@ public class Reservas extends JFrame{
     private JButton btnCancelar;
     private JButton btnLimp;
     private JButton btnConf;
+    private JButton btnBuscar;
 
     public Reservas(Hotel h1){
         setContentPane(reserva);
@@ -310,6 +311,27 @@ public class Reservas extends JFrame{
                         total=(bal2*bal)+pt;
                         tfPreT.setText(""+total);
                     }
+                }
+            }
+        });
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Reserva r;
+                if(tfDNI.getText()!="") {
+                    r = h.comprobarDNI(tfDNI.getText());
+                    if(r==null){
+                        Descripcion d = new Descripcion("El dni no coincide con ninguna reserva del hotel");
+                    }
+                    else{
+                        tfNomb.setText(r.getNombre());
+                        tfAp.setText(r.getApellidos());
+                        tfTel.setText(r.getTelefono());
+                        tfTarC.setText(r.getTarjeta());
+                    }
+                }
+                else {
+                    Descripcion d = new Descripcion("Rellena el dni,al menos, para realizar esta acción");
                 }
             }
         });
